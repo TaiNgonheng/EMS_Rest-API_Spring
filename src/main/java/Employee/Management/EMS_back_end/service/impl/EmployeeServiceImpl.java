@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEmail(updateEmployee.getEmail());
 
         Employee updateEmployeeObj =employeeRepository.save(employee);
-        
+
         return EmployeeMapper.mapToEmployeeDto(updateEmployeeObj);
     }
 
