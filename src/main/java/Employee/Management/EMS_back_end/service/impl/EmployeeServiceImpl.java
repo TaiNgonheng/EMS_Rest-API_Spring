@@ -44,7 +44,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDto updateEmployee(Long employeeId, Employee updateEmployee) {
 
        Employee employee = employeeRepository.findById(employeeId).
-                orElseThrow(() -> new ResourceNotFoundException("Exception not exists "+employeeId));
+                orElseThrow(() -> new ResourceNotFoundException
+                        ("Exception not exists "+employeeId));
         employee.setFirstname(updateEmployee.getFirstname());
         employee.setLastname(updateEmployee.getLastname());
         employee.setEmail(updateEmployee.getEmail());
