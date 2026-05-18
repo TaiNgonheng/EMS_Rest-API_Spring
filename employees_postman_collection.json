@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "EMS Employee API Collection",
+    "description": "Postman collection for Employee Management System API based on EmployeeServiceImplTest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Employee (TC-UNIT-001)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Dara\",\n  \"lastname\": \"Sok\",\n  \"email\": \"dara.sok@ems.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/employees",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees"]
+        },
+        "description": "TC-UNIT-001: Create employee with valid DTO - should save and return EmployeeDto"
+      }
+    },
+    {
+      "name": "Create Employee - Invalid (TC-UNIT-002)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Test\",\n  \"lastname\": \"User\",\n  \"email\": \"test.user@ems.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/employees",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees"]
+        },
+        "description": "TC-UNIT-002: Create employee when repository fails - should propagate exception"
+      }
+    },
+    {
+      "name": "Get Employee by ID (TC-UNIT-003)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "1"]
+        },
+        "description": "TC-UNIT-003: Get employee by valid ID - should return correct EmployeeDto"
+      }
+    },
+    {
+      "name": "Get Employee by ID - Not Found (TC-UNIT-004)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "99"]
+        },
+        "description": "TC-UNIT-004: Get employee with non-existent ID - should throw ResourceNotFoundException"
+      }
+    },
+    {
+      "name": "Get All Employees (TC-UNIT-005)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees"]
+        },
+        "description": "TC-UNIT-005: Get all employees - should return list of all EmployeeDtos"
+      }
+    },
+    {
+      "name": "Get All Employees - Empty (TC-UNIT-010)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees"]
+        },
+        "description": "TC-UNIT-010: Get all employees when no employees exist - should return empty list"
+      }
+    },
+    {
+      "name": "Update Employee (TC-UNIT-006)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Dara\",\n  \"lastname\": \"Chan\",\n  \"email\": \"dara.chan@ems.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "1"]
+        },
+        "description": "TC-UNIT-006: Update employee with valid ID - should update fields and return updated EmployeeDto"
+      }
+    },
+    {
+      "name": "Update Employee - Not Found (TC-UNIT-007)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstname\": \"Test\",\n  \"lastname\": \"User\",\n  \"email\": \"test.user@ems.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "99"]
+        },
+        "description": "TC-UNIT-007: Update employee with non-existent ID - should throw ResourceNotFoundException"
+      }
+    },
+    {
+      "name": "Delete Employee (TC-UNIT-008)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "1"]
+        },
+        "description": "TC-UNIT-008: Delete employee with valid ID - should call deleteById once"
+      }
+    },
+    {
+      "name": "Delete Employee - Not Found (TC-UNIT-009)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/employees/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "employees", "99"]
+        },
+        "description": "TC-UNIT-009: Delete employee with non-existent ID - should throw ResourceNotFoundException"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

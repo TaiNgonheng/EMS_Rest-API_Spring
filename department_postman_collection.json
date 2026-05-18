@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "EMS Department API Collection",
+    "description": "Postman collection for Department Management System API based on DepartmentServiceImplTest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Department (TC-UNIT-011)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"departmentName\": \"Engineering\",\n  \"departmentDescription\": \"Handles all software development\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments"]
+        },
+        "description": "TC-UNIT-011: Create department with valid DTO - should save and return DepartmentDto"
+      }
+    },
+    {
+      "name": "Create Department - Invalid (TC-UNIT-012)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"departmentName\": \"Test Department\",\n  \"departmentDescription\": \"Test description\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments"]
+        },
+        "description": "TC-UNIT-012: Create department when repository fails - should propagate exception"
+      }
+    },
+    {
+      "name": "Get Department by ID (TC-UNIT-013)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "1"]
+        },
+        "description": "TC-UNIT-013: Get department by valid ID - should return correct DepartmentDto"
+      }
+    },
+    {
+      "name": "Get Department by ID - Not Found (TC-UNIT-014)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "99"]
+        },
+        "description": "TC-UNIT-014: Get department with non-existent ID - should throw ResourceNotFoundException"
+      }
+    },
+    {
+      "name": "Get All Departments (TC-UNIT-015)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments"]
+        },
+        "description": "TC-UNIT-015: Get all departments - should return list of all DepartmentDtos"
+      }
+    },
+    {
+      "name": "Get All Departments - Empty (TC-UNIT-016)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments"]
+        },
+        "description": "TC-UNIT-016: Get all departments when no departments exist - should return empty list"
+      }
+    },
+    {
+      "name": "Update Department (TC-UNIT-017)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"departmentName\": \"Engineering & Design\",\n  \"departmentDescription\": \"Handles software and UI/UX design\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "1"]
+        },
+        "description": "TC-UNIT-017: Update department with valid ID - should update fields and return updated DepartmentDto"
+      }
+    },
+    {
+      "name": "Update Department - Not Found (TC-UNIT-018)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"departmentName\": \"Test Department\",\n  \"departmentDescription\": \"Test description\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "99"]
+        },
+        "description": "TC-UNIT-018: Update department with non-existent ID - should throw ResourceNotFoundException"
+      }
+    },
+    {
+      "name": "Delete Department (TC-UNIT-019)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "1"]
+        },
+        "description": "TC-UNIT-019: Delete department with valid ID - should call deleteById once"
+      }
+    },
+    {
+      "name": "Delete Department - Not Found (TC-UNIT-020)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/departments/99",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "departments", "99"]
+        },
+        "description": "TC-UNIT-020: Delete department with non-existent ID - should throw ResourceNotFoundException"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
